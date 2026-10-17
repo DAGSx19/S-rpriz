@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&display=swap');
+
+:root {
+  --ivory: #fbf5ef;
+  --blush: #f2d4da;
+  --cherry: #b02a44;
+  --wine: #4b1021;
+  --wine-deep: #2c0813;
+  --ink: #3a0f1b;
+
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --ease: cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--wine-deep);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Sahne ---------- */
+.stage {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--ivory);
+  background: var(--wine-deep);
+  transition: background-color 0.9s var(--ease), color 0.9s var(--ease);
+}
+
+.stage--invite {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.stage--yes {
+  background: var(--wine);
+}
+
+.screen {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2.5rem 1.5rem 6.5rem;
+  animation: screen-in 0.9s var(--ease) both;
+}
+
+.copy {
+  width: 100%;
+  max-width: 24rem;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 9.5vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  outline: none;
+}
+
+.lead {
+  margin: 1rem auto 1.75rem;
+  max-width: 21rem;
+  font-size: 1.0625rem;
+  opacity: 0.88;
+}
+
+/* ---------- Açılış: kemer çerçeve ---------- */
+.arch {
+  position: relative;
+  width: min(66vw, 17rem);
+  aspect-ratio: 3 / 4;
+  border-radius: 999px 999px 1rem 1rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(242, 212, 218, 0.45);
+  animation: arch-in 1.6s var(--ease) both;
+}
+
+.arch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 999px 999px 0.6rem 0.6rem;
+}
+
+/* ---------- Davet: iki fotoğraf ---------- */
+.duo {
+  position: relative;
+  width: min(86vw, 21rem);
+  height: 15.5rem;
+}
+
+.duo-img {
+  position: absolute;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 0.75rem;
+  border: 0.35rem solid var(--ivory);
+  box-shadow: 0 14px 30px -14px rgba(75, 16, 33, 0.45);
+}
+
+.duo-img--a {
+  top: 0;
+  left: 0;
+  width: 58%;
+  height: 13.5rem;
+}
+
+.duo-img--b {
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  height: 11rem;
+}
+
+/* ---------- Butonlar ---------- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font: 600 1rem/1.2 var(--sans);
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), background-color 0.25s, color 0.25s,
+    border-color 0.25s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--cherry);
+  color: var(--ivory);
+}
+
+.btn--primary:not(:disabled):hover {
+  background: #96213a;
+}
+
+.stage--intro .btn--primary {
+  background: var(--ivory);
+  color: var(--wine);
+}
+
+.stage--intro .btn--primary:hover {
+  background: var(--blush);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--ivory);
+  border-color: rgba(251, 245, 239, 0.55);
+}
+
+.btn--outline:hover {
+  border-color: var(--ivory);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cherry);
+  outline-offset: 3px;
+}
+
+.stage--intro :focus-visible,
+.stage--yes :focus-visible {
+  outline-color: var(--blush);
+}
+
+/* ---------- Olumlu cevap: çiçek ---------- */
+.blossom {
+  width: 8.5rem;
+  height: 8.5rem;
+  overflow: visible;
+}
+
+.blossom-petal {
+  fill: var(--blush);
+  transform-origin: 50px 50px;
+  animation: petal-open 1.4s var(--ease) both;
+  animation-delay: calc(var(--i) * 0.14s + 0.2s);
+}
+
+.blossom-core {
+  fill: var(--cherry);
+  animation: core-in 0.8s var(--ease) 1s both;
+}
+
+.screen--yes .blossom {
+  width: 6rem;
+  height: 6rem;
+}
+
+/* ---------- Tarih ve saat seçimi ---------- */
+.picker {
+  display: grid;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.field,
+.times {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  padding: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.field-input {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  font: 500 1rem/1.2 var(--sans);
+  color: var(--ivory);
+  color-scheme: dark;
+  background: rgba(251, 245, 239, 0.08);
+  border: 1.5px solid rgba(251, 245, 239, 0.4);
+  border-radius: 0.75rem;
+}
+
+.times-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.chip {
+  position: relative;
+  display: block;
+}
+
+.chip input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chip span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  font-weight: 500;
+  border: 1.5px solid rgba(251, 245, 239, 0.4);
+  border-radius: 0.75rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.chip input:checked + span {
+  background: var(--ivory);
+  color: var(--wine);
+  border-color: var(--ivory);
+}
+
+.chip input:focus-visible + span {
+  outline: 3px solid var(--blush);
+  outline-offset: 3px;
+}
+
+.preview {
+  min-height: 1.5rem;
+  margin: 1.25rem 0 1rem;
+  font-size: 0.9375rem;
+  opacity: 0.9;
+}
+
+.summary {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0 0 1.75rem;
+  padding: 1.25rem 1rem;
+  border: 1px solid rgba(242, 212, 218, 0.45);
+  border-radius: 1rem;
+}
+
+.summary-date {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-transform: capitalize;
+}
+
+.summary-time {
+  font-size: 1.0625rem;
+  opacity: 0.88;
+}
+
+/* ---------- Düşen taç yapraklar ---------- */
+.petals {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -5%;
+  left: var(--x);
+  width: var(--s);
+  height: calc(var(--s) * 1.3);
+  background: var(--blush);
+  border-radius: 100% 0 100% 0;
+  opacity: 0.55;
+  animation: petal-fall var(--dur) linear var(--delay) infinite;
+}
+
+/* ---------- Müzik çubuğu ---------- */
+.player {
+  position: fixed;
+  z-index: 5;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: min(calc(100% - 2rem), 20rem);
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: var(--wine);
+  color: var(--ivory);
+  box-shadow: 0 10px 28px -12px rgba(44, 8, 19, 0.7);
+}
+
+.player-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(251, 245, 239, 0.12);
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.player-btn:hover {
+  background: rgba(251, 245, 239, 0.22);
+}
+
+.player :focus-visible {
+  outline-color: var(--blush);
+}
+
+.player-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.player-title,
+.player-artist {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.player-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.player-artist {
+  font-size: 0.8125rem;
+  opacity: 0.75;
+}
+
+/* ---------- Animasyonlar ---------- */
+@keyframes screen-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes arch-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(var(--sway), 50vh, 0) rotate(160deg);
+  }
+  100% {
+    transform: translate3d(calc(var(--sway) * -0.5), 110vh, 0) rotate(320deg);
+  }
+}
+
+@keyframes petal-open {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes core-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- Büyük ekranlar ---------- */
+@media (min-width: 56rem) {
+  .screen--invite {
+    flex-direction: row;
+    gap: 5rem;
+  }
+
+  .screen--invite .copy {
+    text-align: left;
+    max-width: 26rem;
+  }
+
+  .screen--invite .lead {
+    margin-left: 0;
+  }
+
+  .screen--invite .actions {
+    flex-direction: row;
+  }
+
+  .duo {
+    width: 25rem;
+    height: 28rem;
+  }
+
+  .duo-img--a {
+    height: 24rem;
+  }
+
+  .duo-img--b {
+    height: 17rem;
+  }
+
+  .copy {
+    max-width: 28rem;
+  }
+
+  .title {
+    font-size: 3.75rem;
+  }
+}
+
+/* ---------- Çok dar ekranlar ---------- */
+@media (max-width: 22.5rem) {
+  .screen {
+    padding-inline: 1rem;
+  }
+
+  .duo {
+    height: 14rem;
+  }
+
+  .duo-img--a {
+    height: 12rem;
+  }
+
+  .duo-img--b {
+    height: 9.5rem;
+  }
+}
+
+/* ---------- Hareket azaltma ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .petals {
+    display: none;
+  }
+}
